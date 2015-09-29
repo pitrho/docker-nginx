@@ -18,5 +18,5 @@ could be mounted by fig or specified when running `docker run`.
 See this [README](ubuntu/12.04/README.md) for instructions on how to build the
 Ubuntu 12.04 image.
 
-See this [README](ubuntu/12.04/README.md) for instructions on how to build the
+See this [README](ubuntu/14.04/README.md) for instructions on how to build the
 Ubuntu 14.04 image.
