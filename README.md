@@ -1,22 +1,21 @@
 # Docker Precise nginx
-This repository contains the configuration for building a [nginx](http://nginx.org/)
-Docker image for both [Ubuntu 12.04 LTS](http://releases.ubuntu.com/precise/)
-and [Ubuntu 14.04 LTS](http://releases.ubuntu.com/trusty/).
+This folder contains a `Dockerfile` for building an [nginx](http://nginx.org/)
+Docker image from an [Ubuntu 14.04 LTS](http://releases.ubuntu.com/trusty/)
+base image.
 
-This particular nginx Docker image makes it easy to
-
-* Deploy nginx
-* Mount system volumes for configuration.
-
-## Run-time
-The container uses forego (foreman port in GO) to run both nginx and docker-gen.
-Note that the Procfile expects the default.tmpl file to be under /nginxcfg, which
-could be mounted by fig or specified when running `docker run`.
+Unlike the [Ubuntu 12.04 configuration](../12.04/README.md), this image uses
+the [phusion/baseimage](https://github.com/phusion/baseimage-docker) docker
+image.
 
 ## Building the image
 
-See this [README](ubuntu/12.04/README.md) for instructions on how to build the
-Ubuntu 12.04 image.
+Clone the repository
 
-See this [README](ubuntu/14.04/README.md) for instructions on how to build the
-Ubuntu 14.04 image.
+    export IMGTAG="pitrho/trusty-nginx"
+    git clone https://github.com/pitrho/docker-nginx.git
+    cd docker-nginx/ubuntu/14.04
+    docker build -t $IMGTAG .
+
+Verify you have the image locally
+
+    docker images | grep "$IMGTAG"

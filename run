@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+: ${NGINX_RUN_TYPE:='advanced'}
+
+if [ "$NGINX_RUN_TYPE" = 'advanced' ]; then
+  exec forego start -r
+else
+  exec nginx -g "daemon off;"
+fi
