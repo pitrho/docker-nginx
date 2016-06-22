@@ -1,2 +1,2 @@
 nginx: nginx -g "daemon off;"
-dockergen: docker-gen -watch -only-exposed -notify "nginx -s reload" /nginxconf/default.tmpl /etc/nginx/sites-available/default
+dockergen: docker-gen -watch $DOCKERGEN_OPTIONS -notify "service nginx reload" /nginxconf/default.tmpl /etc/nginx/sites-available/default
