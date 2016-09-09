@@ -18,15 +18,17 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN \
   apt-add-repository -y ppa:nginx/stable && \
   apt-get update && \
-  apt-get install -y python-software-properties wget nginx && \
+  apt-get install -y python-software-properties \
+    wget \
+    nginx \
+    python-dev \
+    python-pip \
+    libev4 \
+    libev-dev \
+    expect-dev && \
   rm -rf /var/lib/apt/lists/* && \
   chown -R www-data:www-data /var/lib/nginx && \
   apt-get clean
-
-# Install forego
-RUN wget https://bin.equinox.io/c/ekMN3bCZFUn/forego-stable-linux-amd64.tgz \
-  && tar -C /usr/local/bin -xvzf forego-stable-linux-amd64.tgz \
-  && rm /forego-stable-linux-amd64.tgz
 
 # Install docker-gen
 ENV DOCKER_GEN_VERSION 0.7.3
@@ -34,13 +36,18 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
  && tar -C /usr/local/bin -xvzf docker-gen-linux-amd64-$DOCKER_GEN_VERSION.tar.gz \
  && rm /docker-gen-linux-amd64-$DOCKER_GEN_VERSION.tar.gz
 
+# Install honcho and rancher-gen
+ENV RANCHER_GEN_VERSION 0.1.2
+RUN pip install honcho rancher-gen==$RANCHER_GEN_VERSION
+
 # Create certs directory in /etc/nginx/
 RUN mkdir /etc/nginx/certs
 
 # Define starting point.
 RUN mkdir /etc/service/nginx
 COPY run /etc/service/nginx/run
-COPY Procfile /etc/service/nginx/Procfile
+COPY Procfile.docker-gen /etc/service/nginx/Procfile.docker-gen
+COPY Procfile.rancher-gen /etc/service/nginx/Procfile.rancher-gen
 
 # This came from docker-gen
 ENV DOCKER_HOST unix:///tmp/docker.sock

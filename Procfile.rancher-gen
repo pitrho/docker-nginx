@@ -1,0 +1,2 @@
+nginx: nginx -g "daemon off;"
+ranchergen: rancher-gen --host $RANCHER_GEN_HOST --access-key $RANCHER_GEN_ACCESS_KEY --secret-key $RANCHER_GEN_SECRET_KEY --project-id $RANCHER_GEN_PROJECT_ID $RANCHER_GEN_OPTIONS --notify "service nginx reload" /nginxconf/default.tmpl /etc/nginx/sites-available/default

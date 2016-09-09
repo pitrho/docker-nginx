@@ -2,8 +2,11 @@
 
 : ${NGINX_RUN_TYPE:='advanced'}
 
-if [ "$NGINX_RUN_TYPE" = 'advanced' ]; then
-  exec forego start -r
+if [ "$NGINX_RUN_TYPE" = 'advanced' -o "$NGINX_RUN_TYPE" = 'dockren-gen' ]; then
+  unbuffer honcho -f Procfile.docker-gen start
+elif [ "$NGINX_RUN_TYPE" = 'rancher-gen' ]; then
+  echo "Running rancher-gen"
+  unbuffer  honcho -f Procfile.rancher-gen start
 else
-  exec nginx -g "daemon off;"
+  unbuffer nginx -g "daemon off;"
 fi
