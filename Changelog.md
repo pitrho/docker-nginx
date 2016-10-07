@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.4.0 (2016-10-07)
+* Upgraded rancher-gen to version v0.2.1
+
 ## v0.3.0 (2016-09-09)
 * Added ability to generate configuration files using rancher-gen.
 * Switched from forego to honcho.
