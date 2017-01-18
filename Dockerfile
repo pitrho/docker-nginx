@@ -37,7 +37,7 @@ RUN wget https://github.com/jwilder/docker-gen/releases/download/$DOCKER_GEN_VER
  && rm /docker-gen-linux-amd64-$DOCKER_GEN_VERSION.tar.gz
 
 # Install honcho and rancher-gen
-ENV RANCHER_GEN_VERSION 0.2.1
+ENV RANCHER_GEN_VERSION 0.3.0
 RUN pip install honcho rancher-gen==$RANCHER_GEN_VERSION
 
 # Create certs directory in /etc/nginx/

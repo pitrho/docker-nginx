@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.5.0 (2017-01-18)
+* Upgraded rancher-gen to version v0.3.0.
+
 ## v0.4.0 (2016-10-07)
 * Upgraded rancher-gen to version v0.2.1
 
