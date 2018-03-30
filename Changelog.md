@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.6.0 (2018-03-30)
+* Update Procfile.rancher-gen to have configurable template/destination files.
+* Add default values for RANCHER_GEN_TEMPLATE and RANCHER_GEN_DESTINATION
+for backwards compatibility
+
 ## v0.5.0 (2017-01-18)
 * Upgraded rancher-gen to version v0.3.0.
 
