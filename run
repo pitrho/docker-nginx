@@ -2,6 +2,9 @@
 
 : ${NGINX_RUN_TYPE:='advanced'}
 
+[[ -z "${RANCHER_GEN_TEMPLATE}" ]] && export RANCHER_GEN_TEMPLATE='/nginxconf/default.tmpl'
+[[ -z "${RANCHER_GEN_DESTINATION}" ]] && export RANCHER_GEN_DESTINATION='/etc/nginx/sites-available/default'
+
 if [ "$NGINX_RUN_TYPE" = 'advanced' -o "$NGINX_RUN_TYPE" = 'dockren-gen' ]; then
   unbuffer honcho -f Procfile.docker-gen start
 elif [ "$NGINX_RUN_TYPE" = 'rancher-gen' ]; then
