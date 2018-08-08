@@ -6,6 +6,16 @@
 RANCHER_GEN_TEMPLATES=''
 for VAR in $(env)
 do
+    # Loop through all HTTPPWD_X variables and create the users if any
+    if [ ! -z "$(echo $VAR | grep -E '^HTTPPWD_')" ]; then
+      VAR_VALUE=$(echo "$VAR" | sed -r "s|HTTPPWD_(.*)=||g")
+      username=$(echo "$VAR_VALUE" | sed -r "s|:(.*)||g")
+      password=$(echo "$VAR_VALUE" | sed -r "s|(.*):||g")
+
+      # Create password
+      sh -c "echo -n '${username}:' >> /etc/nginx/.htpasswd"
+      sh -c "openssl passwd -apr1 ${password} >> /etc/nginx/.htpasswd"
+    fi
 
     if [ ! -z "$(echo $VAR | grep -E '^RANCHER_GEN_TEMPLATE_')" ]; then
       template=$(echo "$VAR" | sed -r "s|RANCHER_GEN_TEMPLATE_(.*)=||g")
