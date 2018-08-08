@@ -2,14 +2,28 @@
 
 : ${NGINX_RUN_TYPE:='advanced'}
 
-[[ -z "${RANCHER_GEN_TEMPLATE}" ]] && export RANCHER_GEN_TEMPLATE='/nginxconf/default.tmpl'
-[[ -z "${RANCHER_GEN_DESTINATION}" ]] && export RANCHER_GEN_DESTINATION='/etc/nginx/sites-available/default'
+
+RANCHER_GEN_TEMPLATES=''
+for VAR in $(env)
+do
+
+    if [ ! -z "$(echo $VAR | grep -E '^RANCHER_GEN_TEMPLATE_')" ]; then
+      template=$(echo "$VAR" | sed -r "s|RANCHER_GEN_TEMPLATE_(.*)=||g")
+      RANCHER_GEN_TEMPLATES="$RANCHER_GEN_TEMPLATES --template $template"
+    fi
+done
 
 if [ "$NGINX_RUN_TYPE" = 'advanced' -o "$NGINX_RUN_TYPE" = 'dockren-gen' ]; then
   unbuffer honcho -f Procfile.docker-gen start
 elif [ "$NGINX_RUN_TYPE" = 'rancher-gen' ]; then
   echo "Running rancher-gen"
-  unbuffer  honcho -f Procfile.rancher-gen start
+
+  if [ -z "$RANCHER_GEN_TEMPLATES" ]; then
+    RANCHER_GEN_TEMPLATES="--template /nginxconf/default.tmpl:/etc/nginx/sites-available/default"
+  fi
+
+  export RANCHER_GEN_TEMPLATES=$RANCHER_GEN_TEMPLATES
+  unbuffer honcho -f Procfile.rancher-gen start
 else
   unbuffer nginx -g "daemon off;"
 fi
