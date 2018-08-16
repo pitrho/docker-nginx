@@ -39,8 +39,14 @@ rancher-gen. In addition, you need to pass the following environment variables:
   * RANCHER_GEN_ACCESS_KEY: The Rancher access key
   * RANCHER_GEN_SECRET_KEY: The Rancher secret key
   * RANCHER_GEN_PROJECT_ID: The project id from Rancher
-  * $RANCHER_GEN_OPTIONS(optional): You can pass additional values to
+  * RANCHER_GEN_OPTIONS(optional): You can pass additional values to
     rancher-gen using this variable.
+
+To render multiple templates using rancher-gen, you can pass environment
+variable RANCHER_GEN_TEMPLATE_X, where x is from 1 to infinity. Examples:
+
+    RANCHER_GEN_TEMPLATE_1:/tmp/template1.j2:/tmp/output1.txt
+    RANCHER_GEN_TEMPLATE_2:/tmp/template2.j2:/tmp/output2.txt
 
 Please consult the rancher-gen documentation for more details.
 

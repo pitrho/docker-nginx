@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.7.1 (2018-08-07)
+* Upgraded rancher-gen to version v0.4.1.
+
 ## v0.7.0 (2018-08-07)
 * Upgraded rancher-gen to version v0.4.0.
 * Added ability to create users for basic http auth.
