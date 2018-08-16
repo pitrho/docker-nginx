@@ -46,3 +46,11 @@ Please consult the rancher-gen documentation for more details.
 
 ### Running in default mode
 Default mode simply runs nginx with its default configuration.
+
+## Running with basic http auth
+
+To create one or more users for basic http auth, you can pass the environment
+variable HTTPPWD_X, where X is from 1 to infity. Example:
+
+    HTTPPWD_1=user1:pwd1
+    HTTPPWD_2=user2:pwd2

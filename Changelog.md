@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.0 (2018-08-07)
+* Upgraded rancher-gen to version v0.4.0.
+* Added ability to create users for basic http auth.
+
 ## v0.6.0 (2018-03-30)
 * Update Procfile.rancher-gen to have configurable template/destination files.
 * Add default values for RANCHER_GEN_TEMPLATE and RANCHER_GEN_DESTINATION
