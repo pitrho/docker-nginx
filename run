@@ -33,7 +33,17 @@ elif [ "$NGINX_RUN_TYPE" = 'rancher-gen' ]; then
   fi
 
   export RANCHER_GEN_TEMPLATES=$RANCHER_GEN_TEMPLATES
-  unbuffer honcho -f Procfile.rancher-gen start
+elif [ "$NGINX_RUN_TYPE" = 'kube-gen' ]; then
+  echo " Running kube-gen"
+
+  # Setup kube config file
+  kubectl config --kubeconfig /.kubeconfig set-cluster k8s --server=$K8S_SERVER_URL
+  kubectl config --kubeconfig /.kubeconfig set-credentials $K8S_USERNAME --token=$K8S_USER_TOKEN
+  kubectl config --kubeconfig /.kubeconfig set-context eks --cluster=k8s --user=$K8S_USERNAME
+  kubectl config --kubeconfig /.kubeconfig use-context eks --user=$K8S_USERNAME
+
+
+  unbuffer honcho -f Procfile.kube-gen start
 else
   unbuffer nginx -g "daemon off;"
 fi

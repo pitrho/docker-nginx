@@ -1,0 +1,2 @@
+nginx: nginx -g "daemon off;"
+kubegen: kube-gen -kubeconfig /.kubeconfig $KUBE_GEN_OPTIONS -post-cmd "service nginx reload" /nginxconfig/sites.tmpl /etc/nginx/sites-available/default
