@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.8.0 (2019-09-23)
+* Upgrade to baseimge:0.11.
+* Added ability to use kube-gen to interact with Kubernetes and render templates.
+* Added ability to override Procfile.
+
 ## v0.7.1 (2018-08-07)
 * Upgraded rancher-gen to version v0.4.1.
 
